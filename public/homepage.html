@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Library - Home</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    /* === your old homepage CSS (same as before) === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4a6fa5 0%, #5a7ba6 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: #eeeeee;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .home-icon {
+      font-size: 28px;
+      color: #667eea;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .home-icon:hover {
+      color: #764ba2;
+    }
+
+    .search-bar {
+      position: relative;
+    }
+
+    .search-bar input {
+      padding: 10px 15px 10px 40px;
+      width: 400px;
+      border: 2px solid #eeeeee;
+      border-radius: 25px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .search-bar i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+
+    .settings-icon {
+      font-size: 24px;
+      color: #667eea;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .settings-icon:hover {
+      color: #764ba2;
+    }
+
+    .left-sidebar,
+    .right-sidebar {
+      position: fixed;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
+      padding-top: 80px;
+      z-index: 200;
+    }
+
+    .left-sidebar {
+      background: #eeeeee;
+      left: -250px;
+    }
+
+    .left-sidebar.active {
+      left: 0;
+    }
+
+    .right-sidebar {
+      background: #e8f1f5;
+      right: -250px;
+    }
+
+    .right-sidebar.active {
+      right: 0;
+    }
+
+    .sidebar-item {
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      color: #333;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .sidebar-item:hover {
+      background: #dcdcdc;
+    }
+
+    .sidebar-item i {
+      color: #667eea;
+      font-size: 20px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 150;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .main-content {
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .welcome-card,
+    .books-section {
+      background-color: #eeeeee;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .welcome-card h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .user-details div {
+      color: #666;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .user-details span {
+      color: #667eea;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .book-placeholder {
+      aspect-ratio: 2/3;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #eeeeee;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .book-placeholder:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <i class="fas fa-home home-icon" id="homeIcon"></i>
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search for books..." />
+      </div>
+    </div>
+    <i class="fas fa-ellipsis-v settings-icon" id="settingsIcon"></i>
+  </div>
+
+  <!-- Sidebars -->
+  <div class="left-sidebar" id="leftSidebar">
+    <div class="sidebar-item" id="profileBtn">
+      <i class="fas fa-user"></i><span>Profile</span>
+    </div>
+    <div class="sidebar-item" id="collectionsBtn">
+      <i class="fas fa-book"></i><span>Collections</span>
+    </div>
+    <div class="sidebar-item" id="friendsBtn">
+      <i class="fas fa-users"></i><span>Friends</span>
+    </div>
+  </div>
+
+  <div class="right-sidebar" id="rightSidebar">
+    <div class="sidebar-item" id="logout">
+      <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="welcome-card">
+      <h1>Welcome to Your Library</h1>
+      <div class="user-details">
+      </div>
+    </div>
+
+    <div class="books-section">
+      <h2>Your Books</h2>
+      <div class="books-grid">
+        <div class="book-placeholder"><i class="fas fa-plus fa-2x"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./homepage.js"></script>
+</body>
+</html>
