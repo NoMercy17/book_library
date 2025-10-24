@@ -8,7 +8,7 @@ import {
   getFirestore,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
-import { firebaseConfig } from '../../firebaseConfig.js';
+import { firebaseConfig } from './firebaseConfig.js';
 
 
 // Initialize Firebase
