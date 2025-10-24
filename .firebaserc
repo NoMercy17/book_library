@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "booklibrary1710"
-  }
+    "default": "book-library-project-b336d"
+  },
+  "targets": {},
+  "etags": {}
 }

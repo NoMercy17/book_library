@@ -9,12 +9,6 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      { "source": "/homepage", "destination": "/homepage.html" },
-      { "source": "/profile", "destination": "/profile.html" },
-      { "source": "/collections", "destination": "/collections.html" },
-      { "source": "**", "destination": "/index.html" }
     ]
   }
 }

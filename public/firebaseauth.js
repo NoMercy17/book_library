@@ -13,14 +13,14 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyA3_aGUlHWwcx6rf6Ra9HLHvdNCD-HoRE4",
-    authDomain: "booklibrary1710.firebaseapp.com",
-    projectId: "booklibrary1710",
-    storageBucket: "booklibrary1710.firebasestorage.app",
-    messagingSenderId: "825589113555",
-    appId: "1:825589113555:web:480faa86ad5eec4338aa26",
-    measurementId: "G-ERRSY01H7S"
+  apiKey: "AIzaSyBQixiXScgz6DpQnxaxETxEB_QMWLpPdJs",
+  authDomain: "book-library-project-b336d.firebaseapp.com",
+  projectId: "book-library-project-b336d",
+  storageBucket: "book-library-project-b336d.firebasestorage.app",
+  messagingSenderId: "597026794025",
+  appId: "1:597026794025:web:2b076ac14d44e5b003ca38"
 };
+
 
 // Initialize Firebase FIRST
 const app = initializeApp(firebaseConfig);
