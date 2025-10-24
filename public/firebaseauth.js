@@ -13,12 +13,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBQixiXScgz6DpQnxaxETxEB_QMWLpPdJs",
-  authDomain: "book-library-project-b336d.firebaseapp.com",
-  projectId: "book-library-project-b336d",
-  storageBucket: "book-library-project-b336d.firebasestorage.app",
-  messagingSenderId: "597026794025",
-  appId: "1:597026794025:web:2b076ac14d44e5b003ca38"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 
