@@ -26,4 +26,4 @@ sau
 
     firebase deploy --only hosting
 
-
+dupa ce se face deploy vedeti ca daca schimbati ceva in firestore rules isi ia overwrite cu fisierul firestore.rules de aici
