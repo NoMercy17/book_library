@@ -37,7 +37,6 @@
             font-size: 28px;
         }
 
-        /* Message styling - NEW */
         .message {
             padding: 10px;
             margin-bottom: 15px;
@@ -132,21 +131,22 @@
             margin: 20px 0;
         }
 
-        .icons i {
+        .icon-btn {
             width: 40px;
             height: 40px;
             border: 2px solid #e0e0e0;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: white;
             cursor: pointer;
             transition: all 0.3s;
             font-size: 18px;
             color: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .icons i:hover {
+        .icon-btn:hover {
             background: #667eea;
             color: white;
             border-color: #667eea;
@@ -192,18 +192,12 @@
     <!-- Sign Up Form -->
     <div class="container" id="signup">
         <h1 class="form-title">Register</h1>
-        <!-- NEW: Message div for sign up -->
         <div class="message" id="signUpMessage"></div>
         <form>
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" id="fName" placeholder="First Name" required>
-                <label for="fName">First Name</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" id="lName" placeholder="Last Name" required>
-                <label for="lName">Last Name</label>
+                <input type="text" id="nickname" placeholder="Nickname" required>
+                <label for="nickname">Nickname</label>
             </div>
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
@@ -219,8 +213,12 @@
         </form>
         <p class="or">---------- or ----------</p>
         <div class="icons">
-            <i class="fab fa-google"></i>
-            <i class="fab fa-facebook"></i>
+            <button type="button" class="icon-btn" id="googleSignUpBtn">
+                <i class="fab fa-google"></i>
+            </button>
+            <button type="button" class="icon-btn" id="facebookSignUpBtn">
+                <i class="fab fa-facebook"></i>
+            </button>
         </div>
         <div class="links">
             <p>Already have an account? <a id="signInLink">Sign In</a></p>
@@ -230,7 +228,6 @@
     <!-- Sign In Form -->
     <div class="container hidden" id="signin">
         <h1 class="form-title">Sign In</h1>
-        <!-- NEW: Message div for sign in -->
         <div class="message" id="signInMessage"></div>
         <form>
             <div class="input-group">
@@ -247,8 +244,12 @@
         </form>
         <p class="or">---------- or ----------</p>
         <div class="icons">
-            <i class="fab fa-google"></i>
-            <i class="fab fa-facebook"></i>
+            <button type="button" class="icon-btn" id="googleSignInBtn">
+                <i class="fab fa-google"></i>
+            </button>
+            <button type="button" class="icon-btn" id="facebookSignInBtn">
+                <i class="fab fa-facebook"></i>
+            </button>
         </div>
         <div class="links">
             <p>Don't have an account? <a id="signUpLink">Sign Up</a></p>

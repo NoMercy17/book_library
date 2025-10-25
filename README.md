@@ -21,8 +21,5 @@ Don't overwrite existing files
 
 Dupa ce faceti modificari si vreti sa vedeti cum pusca tot 
     firebase deploy
-sau
-
-    firebase deploy --only hosting
 
 dupa ce se face deploy vedeti ca daca schimbati ceva in firestore rules isi ia overwrite cu fisierul firestore.rules de aici

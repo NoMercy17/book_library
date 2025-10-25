@@ -12,57 +12,45 @@ import {
 
 import { firebaseConfig } from './firebaseConfig.js';
 
-
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const db = getFirestore();
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Listen for auth state changes
 onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        const loggedInUserId = user.uid;
-        localStorage.setItem("loggedInUserId", loggedInUserId);
-
-        try {
-            const docRef = doc(db, "users", loggedInUserId);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                const userData = docSnap.data();
-                document.getElementById("profileFName").innerText = userData.firstName || "Not set";
-                document.getElementById("profileLName").innerText = userData.lastName || "Not set";
-                document.getElementById("profileEmail").innerText = userData.email || user.email;
-            } else {
-                console.log("No document found matching ID");
-                // Fallback to auth email if no document
-                document.getElementById("profileEmail").innerText = user.email;
-                document.getElementById("profileFName").innerText = "Not set";
-                document.getElementById("profileLName").innerText = "Not set";
-            }
-        } catch (error) {
-            console.error("Error getting user document:", error);
-        }
-    } else {
-        console.log("No user logged in");
+    if (!user) {
         window.location.href = "index.html";
+        return;
+    }
+
+    localStorage.setItem("loggedInUserId", user.uid);
+
+    try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            
+            document.getElementById("profileNickname").innerText = userData.nickname || "Not set";
+            document.getElementById("profileEmail").innerText = userData.email || user.email;
+        }
+    } catch (error) {
+        console.error("Error loading profile:", error);
+        document.getElementById("profileNickname").innerText = "Error loading";
     }
 });
 
-// Logout functionality
+// Logout
 document.getElementById("logout").addEventListener("click", () => {
     localStorage.removeItem("loggedInUserId");
     signOut(auth)
-        .then(() => {
-            window.location.href = "index.html";
-        })
-        .catch((error) => {
-            console.error("Error signing out:", error);
-        });
+        .then(() => window.location.href = "index.html")
+        .catch((error) => console.error("Logout error:", error));
 });
 
-// Edit profile button
+// Edit Profile
 document.getElementById("editProfile").addEventListener("click", () => {
     alert("Edit functionality coming soon!");
 });
